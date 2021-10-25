@@ -23,18 +23,18 @@ const Search = () => {
             .then(response => {
                 const data = response.data.data
                 if (data.url != null) {
-                setInfos({
-                    accept_follows: data.accept_followers,
-                    name: data.title,
-                    sub_name: data.url,
-                    header: data.header_img,
-                    followers: data.subscribers,
-                    online: data.active_user_count,
-                    description: data.public_description
-                })
-            } else {
-                setInfos(null)
-            }
+                    setInfos({
+                        accept_follows: data.accept_followers,
+                        name: data.title,
+                        sub_name: data.url,
+                        header: data.header_img,
+                        followers: data.subscribers,
+                        online: data.active_user_count,
+                        description: data.public_description
+                    })
+                } else {
+                    setInfos(null)
+                }
             })
             .catch(error => {
                 setInfos(null)
@@ -54,19 +54,19 @@ const Search = () => {
             <SearchBar placeholder="Type here..."
                 onChangeText={(e) => { change(e) }}
                 value={search} />
-            {infos == null ?
-                <Text>Any subreddit was found</Text> : <>
-                    <TouchableOpacity onPress={() => getPosts()}>
-                        <Card>
-                            <Card.FeaturedTitle>{infos.name}</Card.FeaturedTitle>
-                            <Card.Title>{infos.sub_name}</Card.Title>
-                            <Card.Title>Follows : {infos.followers}</Card.Title>
-                            <Card.Title>Online : {infos.online}</Card.Title>
-                            <Card.Divider />
-                            <Text>Description : {infos.description}</Text>
-                        </Card>
-                    </TouchableOpacity>
-                    <ScrollView>
+            <ScrollView>
+                {infos == null ?
+                    <Text>Any subreddit was found</Text> : <>
+                        <TouchableOpacity onPress={() => getPosts()}>
+                            <Card>
+                                <Card.FeaturedTitle>{infos.name}</Card.FeaturedTitle>
+                                <Card.Title>{infos.sub_name}</Card.Title>
+                                <Card.Title>Follows : {infos.followers}</Card.Title>
+                                <Card.Title>Online : {infos.online}</Card.Title>
+                                <Card.Divider />
+                                <Text>Description : {infos.description}</Text>
+                            </Card>
+                        </TouchableOpacity>
                         {posts ? posts.map((item, index) => (
                             <Card key={index}>
                                 <Card.Title>/r/{item.data.subreddit}</Card.Title>
@@ -80,8 +80,9 @@ const Search = () => {
                                 <Text>{item.data.num_comments} Comments</Text>
                             </Card>
                         )) : <Text></Text>}
-                    </ScrollView>
-                </>}
+                    </>}
+            </ScrollView>
+
         </>
 
     )
