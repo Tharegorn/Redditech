@@ -27,26 +27,27 @@ const HomeScreen = ({ state, descriptor, navigation }) => {
                 <Tab.Screen name="Search" component={Search} options={{
                     headerShown: false, tabBarLabel: ''
                     // tabBarIcon: ({ color, size }) => (
-                        // <MaterialCommunityIcons name="search" color={color} size={size} />
+                    // <MaterialCommunityIcons name="search" color={color} size={size} />
                     // ),
                 }}
                 />
                 {auth.token != null ?
                     <>
                         <Tab.Screen name="Profile" component={Profile} options={{
-                            tabBarLabel: '',
+                            tabBarLabel: '', headerShown: false,
                             tabBarIcon: ({ color, size }) => (
                                 <MaterialCommunityIcons name="account" color={color} size={size} />
                             ),
                         }} />
                         <Tab.Screen name="Settings" component={Settings} options={{
-                            tabBarLabel: '',
+                            tabBarLabel: '', headerShown: false,
                             tabBarIcon: ({ color, size }) => (
                                 <MaterialCommunityIcons name="account-settings-outline" color={color} size={size} />
                             ),
                         }} />
                     </> :
                     <Tab.Screen name="Connect" component={Connect} options={{
+                        tabBarLabel: '', headerShown: false,
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="account-plus" color={color} size={size} />
                         ),
