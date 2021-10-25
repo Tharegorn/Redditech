@@ -40,7 +40,6 @@ function useProvideAuth() {
     }
     function Prefs() {
         GetPrefs(token).then((res) => {
-            console.log(res.data.over_18)
             setPrefs({ lang: res.data.lang, pms: res.data.accept_pms, over_18: res.data.over_18, presence: res.data.show_presence, nsfw: res.data.label_nsfw })
         })
     }
