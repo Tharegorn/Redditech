@@ -10,9 +10,9 @@ import axios from 'axios';
 
 const Settings = () => {
     const auth = useAuth();
-    useEffect(() => {
+    // useEffect(() => {
         auth.Prefs()
-    }, [])
+    // }, [])
     return (
         <>
             <Text>Change Profile settings</Text>
@@ -23,31 +23,29 @@ const Settings = () => {
                 if (auth.prefs.over_18) {
                     const options = {
                         method: 'PATCH',
-                        url: 'https://oauth.reddit.com/api/v1/me/prefs',
+                        url: 'https://oauth.reddit.com/api/v1/me/prefs?over_18=false',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             Authorization: "Bearer " + auth.token,
-                        }, data: {
-                            over_18: false
                         }
                     };
                     axios.request(options).then((res) => {
-                        console.log(response)
+                        console.log(res)
                     }).catch((a) => {
-                        console.error(a)
+                        console.error(a);
                     })
-                } else {
-                    const options = {
-                        method: 'PATCH',
-                        url: 'https://oauth.reddit.com/api/v1/me/prefs',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            Authorization: "Bearer " + auth.token,
-                        }, data: {
-                            over_18: true,
-                        }
-                    };
-                    axios.request(options)
+                // } else {
+                //     const options = {
+                //         method: 'PATCH',
+                //         url: 'https://oauth.reddit.com/api/v1/me/prefs',
+                //         headers: {
+                //             'Content-Type': 'application/x-www-form-urlencoded',
+                //             Authorization: "Bearer " + auth.token,
+                //         }, data: {
+                //             over_18: true,
+                //         }
+                //     };
+                //     axios.request(options)
                 }
                 auth.Prefs()
             }} /></Text>
