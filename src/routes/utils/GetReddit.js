@@ -13,7 +13,7 @@ async function GetProfile(token) {
     return await axios.request(options)
 }
 
-function GetPrefs(token) {
+async function GetPrefs(token) {
     const options = {
         method: 'GET',
         url: 'https://oauth.reddit.com/api/v1/me/prefs',
@@ -22,13 +22,7 @@ function GetPrefs(token) {
             Authorization: "Bearer " + token,
         },
     };
-    axios.request(options).then(function (response) {
-        console.log(response.data);
-        return (null)
-    }).catch(function (error) {
-        console.error(error);
-        return (null);
-    })
+    return await axios.request(options)
 }
 module.exports = {
     GetProfile,

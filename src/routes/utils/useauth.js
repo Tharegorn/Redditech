@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { GetProfile } from './GetReddit'
+import { GetProfile, GetPrefs } from './GetReddit'
 import { GenToken } from './TokenUtils'
 
 const authContext = createContext();
@@ -17,6 +17,7 @@ function useProvideAuth() {
     const [token, setToken] = useState(null)
     const [validity, setValidity] = useState(null)
     const [profile, setProfile] = useState({ name: null, profile_pic: null, desc: null, karma: null, coins: null, prefix: null, url: null })
+    const [prefs, setPrefs] = useState({ lang: null, pms: null, over_18: null, presence: null, nsfw: null })
 
     function Authenticate() {
         GenToken().then((res) => {
@@ -37,14 +38,22 @@ function useProvideAuth() {
             })
         });
     }
+    function Prefs() {
+        GetPrefs(token).then((res) => {
+            console.log(res.data.over_18)
+            setPrefs({ lang: res.data.lang, pms: res.data.accept_pms, over_18: res.data.over_18, presence: res.data.show_presence, nsfw: res.data.label_nsfw })
+        })
+    }
     return {
         token,
         profile,
+        prefs,
         setToken,
         setValidity,
         Authenticate,
         setProfile,
         Profile,
+        Prefs,
 
     }
 }
