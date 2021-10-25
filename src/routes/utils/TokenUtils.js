@@ -5,7 +5,7 @@ const config = {
     redirectUrl: 'com.newreddit://oauth2redirect/reddit',
     clientId: 'cJBN5Flkd8Uscn9w-SzI-A',
     clientSecret: '', // empty string - needed for iOS
-    scopes: ['identity', 'edit', 'subscribe'],
+    scopes: ['identity', 'edit', 'subscribe', 'save', 'submit', 'read', 'modconfig', 'account', 'vote', 'flair'],
     serviceConfiguration: {
         authorizationEndpoint: 'https://www.reddit.com/api/v1/authorize.compact',
         tokenEndpoint: 'https://www.reddit.com/api/v1/access_token',
