@@ -5,14 +5,17 @@ import {
     ScrollView,
     Button,
 } from 'react-native';
-import { Card } from 'react-native-elements'
+import { Card, ButtonGroup } from 'react-native-elements'
 import axios from 'axios'
 
 const HomePage = (navigation) => {
     const [posts, setPosts] = useState();
-    const [trend, setTrend] = useState("top");
-    function load() {
-        axios.get("https://www.reddit.com/" + trend + ".json?limit=100")
+    const [bttIndex, setIndex] = useState(0);
+    const map = {0:'new', 1: 'rising', 2: 'best', 3:'top', 4:'hot'}
+    function load(e) {
+        if (e == undefined)
+            e= 0
+        axios.get("https://www.reddit.com/" + map[e] + ".json?limit=100")
             .then(response => {
                 setPosts(response.data.data.children)
             })
@@ -26,11 +29,7 @@ const HomePage = (navigation) => {
     return (
         <View>
             <ScrollView>
-                <Button title="New" onPress={() => { setTrend("new"); load() }} />
-                <Button title="Rising" onPress={() => { setTrend("rising"); load() }} />
-                <Button title="Best" onPress={() => { setTrend("best"); load() }} />
-                <Button title="Top" onPress={() => { setTrend("top"); load() }} />
-                <Button title="Hot" onPress={() => { setTrend("hot"); load() }} />
+                <ButtonGroup buttons={["New", "Rising", "Best", "Top", "Hot"]} selectedIndex={bttIndex} onPress={(e) => {setIndex(e); load(e)}}/>
                 {posts ? posts.map((item, index) => (
                     <Card key={index}>
                         <Card.Title>/r/{item.data.subreddit}</Card.Title>
