@@ -17,7 +17,25 @@ function useProvideAuth() {
     const [token, setToken] = useState(null)
     const [validity, setValidity] = useState(null)
     const [profile, setProfile] = useState({ name: null, profile_pic: null, desc: null, karma: null, coins: null, prefix: null, url: null })
-    const [prefs, setPrefs] = useState({ lang: null, pms: null, over_18: null, presence: null, nsfw: null })
+    const [prefs, setPrefs] = useState({
+        lang: null,
+        over_18: null,
+        presence: null,
+        autoplay: null,
+        e_chat_request: null,
+        e_comment_reply: null,
+        e_community_discovery: null,
+        e_digests: null,
+        e_messages: null,
+        e_new_user_welcome: null,
+        e_post_reply: null,
+        e_private_message: null,
+        e_unsubscribe_all: null,
+        e_upvote_comment: null,
+        e_upvote_post: null,
+        e_user_new_follower: null,
+        e_username_mention: null,
+    })
 
     function Authenticate() {
         GenToken().then((res) => {
@@ -40,7 +58,12 @@ function useProvideAuth() {
     }
     function Prefs() {
         GetPrefs(token).then((res) => {
-            setPrefs({ lang: res.data.lang, pms: res.data.accept_pms, over_18: res.data.over_18, presence: res.data.show_presence, nsfw: res.data.label_nsfw })
+            setPrefs({
+                lang: res.data.lang,
+                over_18: res.data.over_18,
+                presence: res.data.show_presence,
+                autoplay: res.data.video_autoplay
+            })
         })
     }
     return {
