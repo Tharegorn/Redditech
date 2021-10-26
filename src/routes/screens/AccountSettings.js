@@ -15,10 +15,10 @@ const Settings = () => {
     // }, [])
     return (
         <>
-            <Text>Change Profile settings</Text>
-            <Text>Accept pms from : {auth.prefs.pms}</Text>
-            <Text>Show presence : <Switch value={auth.prefs.presence} /></Text>
-            <Text>Over 18: <Switch value={auth.prefs.over_18} onChange={() => {
+            <Text style={{color: 'black'}}>Change Profile settings</Text>
+            <Text style={{color: 'black'}}>Accept pms from : {auth.prefs.pms}</Text>
+            <Text style={{color: 'black'}}>Show presence : <Switch value={auth.prefs.presence} /></Text>
+            <Text style={{color: 'black'}}>Over 18: <Switch value={auth.prefs.over_18} onChange={() => {
                 console.log(auth.token)
                 if (auth.prefs.over_18) {
                     const options = {
@@ -49,9 +49,9 @@ const Settings = () => {
                 }
                 auth.Prefs()
             }} /></Text>
-            <Text>label nsfw: <Switch value={auth.prefs.label_nsfw} /></Text>
-            <Text>Lang: {auth.prefs.lang}</Text>
-            <Text>Description: </Text>
+            <Text style={{color: 'black'}}>label nsfw: <Switch value={auth.prefs.label_nsfw} /></Text>
+            <Text style={{color: 'black'}}>Lang: {auth.prefs.lang}</Text>
+            <Text style={{color: 'black'}}>Description: </Text>
         </>
     )
 }

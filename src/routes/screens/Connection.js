@@ -6,7 +6,6 @@ import {
     View
 } from 'react-native';
 import { useAuth } from '../utils/useauth';
-import Video from 'react-native-video'
 
 const Connect = () => {
     const auth = useAuth();

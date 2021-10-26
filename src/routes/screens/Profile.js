@@ -13,12 +13,12 @@ const Profile = () => {
     }, [])
     return (
         <>
-            <Text>Name : {auth.profile.name}</Text>
-            <Text>Desc : {auth.profile.desc}</Text>
-            <Text>karma : {auth.profile.karma}</Text>
-            <Text>Coins : {auth.profile.coins}</Text>
-            <Text>Prefix : {auth.profile.prefix}</Text>
-            <Text>url : {auth.profile.url}</Text>
+            <Text style={{color: 'black'}}>Name : {auth.profile.name}</Text>
+            <Text style={{color: 'black'}}>Desc : {auth.profile.desc}</Text>
+            <Text style={{color: 'black'}}>karma : {auth.profile.karma}</Text>
+            <Text style={{color: 'black'}}>Coins : {auth.profile.coins}</Text>
+            <Text style={{color: 'black'}}>Prefix : {auth.profile.prefix}</Text>
+            <Text style={{color: 'black'}}>url : {auth.profile.url}</Text>
             <Image source={{ uri: "https://styles.redditmedia.com/t5_zu6i3/styles/profileIcon_di7saosll7u71.jpg" }} />
         </>
     )

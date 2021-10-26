@@ -13,6 +13,7 @@ import axios from 'axios';
 
 const Search = () => {
     const auth = useAuth();
+    const [bttProps, setBtt] = useState("connect")
     const [search, setSearch] = useState("");
     const [infos, setInfos] = useState(null);
     const [posts, setPosts] = useState(null);
@@ -40,6 +41,13 @@ const Search = () => {
                 setInfos(null)
             })
     }
+    useEffect(() => {
+        if (auth.token) {
+            setBtt("qsd")
+        } else {
+            setBtt("connect")
+        }
+    }, [])
     function getPosts() {
         axios.get("https://www.reddit.com/r/" + search + "/top.json?limit=100")
             .then(response => {
@@ -65,6 +73,9 @@ const Search = () => {
                                 <Card.Title>Online : {infos.online}</Card.Title>
                                 <Card.Divider />
                                 <Text>Description : {infos.description}</Text>
+                                {bttProps == "connect" ?
+                                <Button title="Connect to reddit account" onPress={() => { auth.Authenticate(); setSearch(""); setInfos(null) }}></Button>
+                                : <Text>Already connected</Text>}
                             </Card>
                         </TouchableOpacity>
                         {posts ? posts.map((item, index) => (
