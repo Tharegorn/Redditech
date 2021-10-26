@@ -6,6 +6,7 @@ import Profile from './screens/Profile';
 import Connect from './screens/Connection';
 import Search from './screens/Search';
 import Settings from './screens/AccountSettings';
+import list from './screens/list'
 import { useAuth } from './utils/useauth';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -40,6 +41,12 @@ const HomeScreen = ({ state, descriptor, navigation }) => {
                             ),
                         }} />
                         <Tab.Screen name="Settings" component={Settings} options={{
+                            tabBarLabel: '', headerShown: false,
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="account-settings-outline" color={color} size={size} />
+                            ),
+                        }} />
+                        <Tab.Screen name="Another" component={list} options={{
                             tabBarLabel: '', headerShown: false,
                             tabBarIcon: ({ color, size }) => (
                                 <MaterialCommunityIcons name="account-settings-outline" color={color} size={size} />
