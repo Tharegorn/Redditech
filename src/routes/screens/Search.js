@@ -26,13 +26,15 @@ const Search = () => {
                 if (data.url != null) {
                     setInfos({
                         accept_follows: data.accept_followers,
-                        name: data.title,
+                        name: data.display_name,
                         sub_name: data.url,
                         header: data.header_img,
                         followers: data.subscribers,
                         online: data.active_user_count,
-                        description: data.public_description
+                        description: data.public_description,
+                        icon: data.community_icon,
                     })
+                    console.log(infos.icon.split('?')[0])
                 } else {
                     setInfos(null)
                 }
@@ -68,15 +70,16 @@ const Search = () => {
                         <TouchableOpacity onPress={() => getPosts()}>
                             <Card>
                                 <Card.FeaturedTitle>{infos.name}</Card.FeaturedTitle>
+                                {infos.icon ? <Card.Image source={{ uri: infos.icon.split('?')[0] }} style={{ width: 50, height: 50 }} /> : <></>}
                                 <Card.Title>{infos.sub_name}</Card.Title>
                                 <Card.Title>Follows : {infos.followers}</Card.Title>
                                 <Card.Title>Online : {infos.online}</Card.Title>
                                 <Card.Divider />
-                                <Card.Image source={{uri: infos.header}} style={{height: 100}}/>
+                                {infos.header ? <Card.Image source={{ uri: infos.header }} style={{ height: 100 }} /> : <></>}
                                 <Text>Description : {infos.description}</Text>
                                 {bttProps == "connect" ?
-                                <Button title="Connect to reddit account" onPress={() => { auth.Authenticate(); setSearch(""); setInfos(null) }}></Button>
-                                : <Text style={{color: 'black'}}>Faut faire le bouton pour sub</Text>}
+                                    <Button title="Connect to reddit account" onPress={() => { auth.Authenticate(); setSearch(""); setInfos(null) }}></Button>
+                                    : <Text style={{ color: 'black' }}>Faut faire le bouton pour sub</Text>}
                             </Card>
                         </TouchableOpacity>
                         {posts ? posts.map((item, index) => (
