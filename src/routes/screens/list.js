@@ -32,6 +32,7 @@ const list = () => {
         <>
             <ScrollView>
                 {subs ? subs.map((item, index) => (<Card key={index}>
+                    {item.data.community_icon ? <Card.Image source={{ uri: item.data.community_icon.split('?')[0] }} style={{ width: 50, height: 50 }} /> : <></>}
                     <Card.Title style={{ color: 'black' }}>{item.data.display_name}</Card.Title>
                     {item.data.banner_background_image ? <Card.Image source={{ uri: item.data.banner_background_image.split('?')[0] }} style={{ width: 500 }} /> : <></>}
                     <Text style={{ color: 'black' }}>Subscribers : {item.data.subscribers}</Text>
