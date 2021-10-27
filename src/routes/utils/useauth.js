@@ -22,19 +22,6 @@ function useProvideAuth() {
         over_18: null,
         presence: null,
         autoplay: null,
-        e_chat_request: null,
-        e_comment_reply: null,
-        e_community_discovery: null,
-        e_digests: null,
-        e_messages: null,
-        e_new_user_welcome: null,
-        e_post_reply: null,
-        e_private_message: null,
-        e_unsubscribe_all: null,
-        e_upvote_comment: null,
-        e_upvote_post: null,
-        e_user_new_follower: null,
-        e_username_mention: null,
     })
 
     function Authenticate() {
@@ -47,7 +34,7 @@ function useProvideAuth() {
         GetProfile(token).then((response) => {
             setProfile({
                 name: response.data.name,
-                profile_pic: response.data.icon_img.split("?")[0],
+                profile_pic: (response.data.icon_img).split('?')[0],
                 desc: response.data.subreddit.public_description,
                 karma: response.data.total_karma,
                 coins: response.data.coins,
@@ -59,10 +46,10 @@ function useProvideAuth() {
     function Prefs() {
         GetPrefs(token).then((res) => {
             setPrefs({
-                lang: res.data.lang,
+                lang: res.data.country_code,
                 over_18: res.data.over_18,
                 presence: res.data.show_presence,
-                autoplay: res.data.video_autoplay
+                autoplay: res.data.video_autoplay,
             })
         })
     }

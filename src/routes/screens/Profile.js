@@ -19,7 +19,7 @@ const Profile = () => {
             <Text style={{color: 'black'}}>Coins : {auth.profile.coins}</Text>
             <Text style={{color: 'black'}}>Prefix : {auth.profile.prefix}</Text>
             <Text style={{color: 'black'}}>url : {auth.profile.url}</Text>
-            <Image source={{ uri: "https://styles.redditmedia.com/t5_zu6i3/styles/profileIcon_di7saosll7u71.jpg" }} />
+            {auth.profile.profile_pic ?<Image source={{ uri: auth.profile.profile_pic}} style={{height: 100, width: 100, borderRadius: 300}}/> : <></>}
         </>
     )
 }
