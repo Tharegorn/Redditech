@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 function unsubscribe(name, token) {
-    console.log(token)
     const options = {
         method: 'POST',
         url: 'https://oauth.reddit.com/api/unsubscribe',
