@@ -72,10 +72,11 @@ const Search = () => {
                                 <Card.Title>Follows : {infos.followers}</Card.Title>
                                 <Card.Title>Online : {infos.online}</Card.Title>
                                 <Card.Divider />
+                                <Card.Image source={{uri: infos.header}} style={{height: 100}}/>
                                 <Text>Description : {infos.description}</Text>
                                 {bttProps == "connect" ?
                                 <Button title="Connect to reddit account" onPress={() => { auth.Authenticate(); setSearch(""); setInfos(null) }}></Button>
-                                : <Text>Already connected</Text>}
+                                : <Text style={{color: 'black'}}>Faut faire le bouton pour sub</Text>}
                             </Card>
                         </TouchableOpacity>
                         {posts ? posts.map((item, index) => (
