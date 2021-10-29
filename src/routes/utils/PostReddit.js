@@ -14,9 +14,9 @@ function unsubscribe(name, token) {
             'Content-Type': 'application/x-www-form-urlencoded',
         }, body: JSON.stringify(data)
     }).then((r) => {
-        console.log("good", r)
+        console.log(r)
     }).catch((e) => {
-        console.log("pas bon ça", e)
+        console.log(e)
     })
 }
 
