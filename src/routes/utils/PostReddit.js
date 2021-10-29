@@ -1,24 +1,23 @@
 import axios from 'axios';
 
 function unsubscribe(name, token) {
-    const options = {
+    console.log(name)
+    var data = {
+        sr: 't5_' + name,
+        action: 'unsub'
+    }
+    fetch('https://oauth.reddit.com/api/subscribe', {
         method: 'POST',
-        url: 'https://oauth.reddit.com/api/unsubscribe',
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            Authorization: "Bearer " + token,
-        }, body: {
-            'uh': '@modhash',
-            'sr': name,
-            'action': 'unsub',
-        }
-    };
-    axios.request(options).then((res) => {
-        console.log(res)
+            Authorization: "bearer " + token,
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }, body: JSON.stringify(data)
+    }).then((r) => {
+        console.log("good", r)
     }).catch((e) => {
-        console.log(e)
-    });
+        console.log("pas bon ça", e)
+    })
 }
 
 module.exports = {
