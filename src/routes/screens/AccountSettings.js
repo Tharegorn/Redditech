@@ -36,7 +36,6 @@ const Settings = () => {
             }} /></Text>
             <Text style={{ color: 'black' }}>AutoPlay: <Switch value={auth.prefs.autoplay} onValueChange={(e) => {
                 modify({'video_autoplay': e})
-                console.log(auth.prefs)
             }} /></Text>
             <Text style={{ color: 'black' }}>Country Code: {auth.prefs.lang}</Text>
             <Text style={{ color: 'black' }}>Description: </Text>
