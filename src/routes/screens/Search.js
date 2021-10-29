@@ -3,6 +3,7 @@ import {
     Text,
     Button,
     Image,
+    View,
     TouchableOpacity,
     ScrollView
 } from 'react-native';
@@ -13,7 +14,7 @@ import axios from 'axios';
 
 const Search = () => {
     const auth = useAuth();
-    const [bttProps, setBtt] = useState("connect")
+    const [bttProps, setBtt] = useState(null)
     const [search, setSearch] = useState("");
     const [infos, setInfos] = useState(null);
     const [posts, setPosts] = useState(null);
@@ -33,8 +34,17 @@ const Search = () => {
                         online: data.active_user_count,
                         description: data.public_description,
                         icon: data.community_icon,
+
                     })
-                    console.log(infos.icon.split('?')[0])
+                    if (auth.token) {
+                        auth.Subs()
+                        for (var e = 0; auth.subs[e]; e++) {
+                            if (auth.subs[e] === data.id) {
+                                setBtt('unsub')
+                                break;
+                            } else setBtt('sub')
+                        }
+                    }
                 } else {
                     setInfos(null)
                 }
@@ -43,13 +53,13 @@ const Search = () => {
                 setInfos(null)
             })
     }
-    useEffect(() => {
-        if (auth.token) {
-            setBtt("qsd")
-        } else {
-            setBtt("connect")
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (auth.token) {
+    //         setBtt("qsd")
+    //     } else {
+    //         setBtt("connect")
+    //     }
+    // }, [])
     function getPosts() {
         axios.get("https://www.reddit.com/r/" + search + "/top.json?limit=100")
             .then(response => {
@@ -77,23 +87,40 @@ const Search = () => {
                                 <Card.Divider />
                                 {infos.header ? <Card.Image source={{ uri: infos.header }} style={{ height: 100 }} /> : <></>}
                                 <Text>Description : {infos.description}</Text>
-                                {bttProps == "connect" ?
-                                    <Button title="Connect to reddit account" onPress={() => { auth.Authenticate(); setSearch(""); setInfos(null) }}></Button>
-                                    : <Text style={{ color: 'black' }}>Faut faire le bouton pour sub</Text>}
+                                {bttProps === "sub" ?
+                                    <Button title="Sub" onPress={() => {}}></Button>
+                                    : <Button title="Unsub" onPress={() => {}}></Button>}
                             </Card>
                         </TouchableOpacity>
                         {posts ? posts.map((item, index) => (
-                            <Card key={index}>
-                                <Card.Title>/r/{item.data.subreddit}</Card.Title>
-                                <Card.Title>{item.data.title}</Card.Title>
-                                <Card.Title>{item.data.created}</Card.Title>
-                                <Card.Divider />
+                            <View key={index} style={{
+                                height: 90,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                borderRadius: 15,
+                                shadowOffset: { width: 0, height: 0 },
+                                shadowOpacity: 1,
+                                shadowRadius: 8,
+                                elevation: 8,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                paddingLeft: 16,
+                                paddingRight: 14,
+                                marginTop: 6,
+                                marginBottom: 6,
+                                marginLeft: 16,
+                                marginRight: 16
+                            }}>
+                                <Text>/r/{item.data.subreddit}</Text>
+                                <Text>{item.data.title}</Text>
+                                <Text>{item.data.created}</Text>
                                 {item.data.thumbnail ?
-                                    <Card.Image source={{ uri: item.data.thumbnail }} style={{ height: item.data.thumbnail_height, width: item.data.thumbnail_width }}>
-                                    </Card.Image> : <Text>NoImage</Text>}
+                                    <Image source={{ uri: item.data.thumbnail }} style={{ height: item.data.thumbnail_height, width: item.data.thumbnail_width }}>
+                                    </Image> : <Text>NoImage</Text>}
                                 {/* <Text>https://reddit.com{item.data.permalink}</Text> */}
                                 <Text>{item.data.num_comments} Comments</Text>
-                            </Card>
+                            </View>
                         )) : <Text></Text>}
                     </>}
             </ScrollView>
