@@ -69,6 +69,24 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Gotham-Black.otf</string>
+		<string>Gotham-Bold.otf</string>
+		<string>Gotham-BookItalic.otf</string>
+		<string>Gotham-Light.otf</string>
+		<string>Gotham-Thin.otf</string>
+		<string>Gotham-ThinItalic.otf</string>
+		<string>Gotham-UltraItalic.otf</string>
+		<string>Gotham-XLight.otf</string>
+		<string>Gotham-XLightItalic.otf</string>
+		<string>GothamBold.ttf</string>
+		<string>GothamBoldItalic.ttf</string>
+		<string>GothamBook.ttf</string>
+		<string>GothamBookItalic.ttf</string>
+		<string>GothamLight.ttf</string>
+		<string>GothamLightItalic.ttf</string>
+		<string>GothamMedium_1.ttf</string>
+		<string>GothamMedium.ttf</string>
+		<string>GothamMediumItalic.ttf</string>
 	</array>
 </dict>
 </plist>

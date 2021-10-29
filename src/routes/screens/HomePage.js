@@ -1,17 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  Button,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import {Text, View, ScrollView, Button, StyleSheet, Image} from 'react-native';
 import Header from '../navigation/Header';
 import axios from 'axios';
-import {Card, ButtonGroup} from 'react-native-elements';
+import {ButtonGroup} from 'react-native-elements';
+import CardPost from '../components/CardPost';
 
 const HomePage = () => {
   const [posts, setPosts] = useState();
@@ -57,25 +49,18 @@ const HomePage = () => {
           />
           {posts ? (
             posts.map((item, index) => (
-              <Card containerStyle={styles.cardStyle} key={index}>
-                <Card.Title>
-                  <Text style={styles.paragraph}>/r/{item.data.subreddit}</Text>
-                </Card.Title>
-                {item.data.thumbnail ? (
-                  <Card.Image
-                    source={{uri: item.data.thumbnail}}
-                    style={{
-                      width: '100%',
-                    }}></Card.Image>
-                ) : (
-                  <Text>NoImage</Text>
-                )}
-                <Card.Title>{item.data.title}</Card.Title>
-                <Card.Title>{item.data.created}</Card.Title>
-
-                {/* <Text>https://reddit.com{item.data.permalink}</Text> */}
-                <Text>{item.data.num_comments} Comments</Text>
-              </Card>
+              <CardPost
+                key={index}
+                avatar={require('../assets/reddit-avatar.png')}
+                mention="DERNIÈRE PUBLICATION SUR"
+                r="/r/"
+                title={item.data.subreddit}
+                image={require('../assets/empty.png')}
+                description={item.data.title}
+                infos={item.data.created}
+                comments={item.data.num_comments}
+                commentsMention=" comments"
+              />
             ))
           ) : (
             <Text>Nothing</Text>
