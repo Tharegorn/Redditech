@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { GetProfile, GetPrefs } from './GetReddit'
+import { GetProfile, GetPrefs, GetSubs } from './GetReddit'
 import { GenToken } from './TokenUtils'
 
 const authContext = createContext();
@@ -23,7 +23,7 @@ function useProvideAuth() {
         presence: null,
         autoplay: null,
     })
-
+    const [subs, setSubs] = useState([])
     function Authenticate() {
         GenToken().then((res) => {
             setToken(res.token)
@@ -53,16 +53,27 @@ function useProvideAuth() {
             })
         })
     }
+
+    function Subs() {
+        let fill = []
+        GetSubs(token).then((r) => {
+            r.data.data.children.forEach(element => {
+                fill.push(element.data.id)
+            });
+            setSubs(fill)
+        })
+    }
     return {
         token,
         profile,
         prefs,
+        subs,
         setToken,
         setValidity,
         Authenticate,
         setProfile,
         Profile,
         Prefs,
-
+        Subs,
     }
 }
