@@ -43,7 +43,7 @@ export default function CardPost({
                   {description}
                 </Text>
                 <View
-                  style={{position: 'absolute', bottom: 10, paddingLeft: 15}}>
+                  style={{position: 'absolute', bottom: 15, paddingLeft: 15}}>
                   <Text style={{paddingBottom: 10}}>{infos}</Text>
                   <View style={styles.viewHorizontal}>
                     <Text style={{opacity: 0.5}}>{comments}</Text>

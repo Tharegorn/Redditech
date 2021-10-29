@@ -16,7 +16,13 @@ const Home = () => {
 
   return (
     <>
-      <Tab.Navigator>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: '#fff',
+          inactiveTintColor: 'lightgray',
+          activeBackgroundColor: '#000',
+          inactiveBackgroundColor: '#000',
+        }}>
         <Tab.Screen
           name="Home"
           component={HomePage}

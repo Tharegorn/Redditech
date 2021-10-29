@@ -4,6 +4,7 @@ import Header from '../navigation/Header';
 import axios from 'axios';
 import {ButtonGroup} from 'react-native-elements';
 import CardPost from '../components/CardPost';
+import MiniCards from '../components/MiniCards';
 
 const HomePage = () => {
   const [posts, setPosts] = useState();
@@ -28,25 +29,53 @@ const HomePage = () => {
       <ScrollView>
         <View style={styles.container}>
           <Image
+            style={styles.background}
             source={require('../assets/FrameOrange.png')}
-            style={{
-              position: 'absolute',
-              height: 200,
-              width: '100%',
-              zIndex: 0,
-              left: 0,
-              right: 0,
-            }}
           />
           <Header />
-          <ButtonGroup
-            buttons={['New', 'Rising', 'Best', 'Top', 'Hot']}
-            selectedIndex={bttIndex}
-            onPress={e => {
-              setIndex(e);
-              load(e);
-            }}
-          />
+          <View>
+            <View
+              style={[
+                {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                },
+              ]}>
+              <MiniCards title="New" image={require('../assets/new.jpeg')} />
+              <MiniCards
+                title="Rising"
+                image={require('../assets/rising.jpg')}
+              />
+            </View>
+            <View
+              style={[
+                {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                },
+              ]}>
+              <MiniCards title="Best" image={require('../assets/best.jpg')} />
+              <MiniCards title="Top" image={require('../assets/top.jpg')} />
+            </View>
+            <View
+              style={[
+                {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                },
+              ]}>
+              <View style={{marginBottom: 10}}>
+                <MiniCards title="Hot" image={require('../assets/hot.jpg')} />
+              </View>
+            </View>
+          </View>
+
           {posts ? (
             posts.map((item, index) => (
               <CardPost
@@ -90,6 +119,14 @@ const styles = StyleSheet.create({
   paragraph: {
     color: '#FFF',
     paddingLeft: 0,
+  },
+  background: {
+    position: 'absolute',
+    height: 200,
+    width: '100%',
+    zIndex: 0,
+    left: 0,
+    right: 0,
   },
 });
 
