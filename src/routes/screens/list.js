@@ -38,7 +38,9 @@ const list = () => {
                     <Text style={{ color: 'black' }}>Subscribers : {item.data.subscribers}</Text>
                     <Text style={{ color: 'black' }}>{item.data.display_name_prefixed}</Text>
                     <Text style={{ color: 'black' }}>{item.data.description}</Text>
-                    <Button title="unsubscribe" onPress={() => { console.log(item.data); unsubscribe(item.data.display_name, auth.token) }}></Button>
+                    <Button title="unsubscribe" onPress={() => {
+                        unsubscribe(item.data.id, auth.token)
+                        }}></Button>
                 </Card>)) : <Text style={{ color: 'black' }}>no</Text>}
             </ScrollView>
         </>
