@@ -1,10 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import Header from '../navigation/Header';
-import axios from 'axios';
-import {Card, ButtonGroup} from 'react-native-elements';
-import HomePage from '../screens/HomePage';
-import {StylesContext, StylesProvider} from '@material-ui/styles';
 import Animated from 'react-native-reanimated';
 
 export default function MiniCards({title, image}) {
