@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, ScrollView, Button, StyleSheet, Image} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  Button,
+  StyleSheet,
+  Image,
+  StatusBar,
+} from 'react-native';
 import Header from '../navigation/Header';
 import axios from 'axios';
 import {ButtonGroup} from 'react-native-elements';
@@ -26,7 +34,8 @@ const HomePage = () => {
   }, []);
   return (
     <View>
-      <ScrollView>
+      <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <Image
             style={styles.background}

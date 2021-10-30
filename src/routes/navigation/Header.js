@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginHorizontal: 20,
-    marginTop: 10,
+    marginTop: 35,
     paddingBottom: 20,
   },
   logo: {
