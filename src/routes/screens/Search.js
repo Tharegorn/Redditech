@@ -32,6 +32,7 @@ const Search = () => {
       .then(response => {
         const data = response.data.data;
         if (data.url != null) {
+          console.log(response.data.data);
           setInfos({
             accept_follows: data.accept_followers,
             name: data.title,
@@ -40,6 +41,7 @@ const Search = () => {
             followers: data.subscribers,
             online: data.active_user_count,
             description: data.public_description,
+            icon: data.community_icon
           });
         } else {
           setInfos(null);
@@ -106,7 +108,7 @@ const Search = () => {
                   mention="MORE INSIDE"
                   r="/r/"
                   titler={infos.name}
-                  image={require('../assets/empty.png')}
+                  image={infos.icon ? {uri: infos.icon.split("?")[0]} :require('../assets/empty.png')}
                   follow={infos.followers}
                   mentionFollow="Followers"
                   mentionOnline="Online Redditors"
@@ -121,7 +123,11 @@ const Search = () => {
                     key={index}
                     r="/r/"
                     titler={infos.name}
-                    image={require('../assets/empty.png')}
+                    image={
+                      item.data.thumbnail != 'self'
+                        ? {uri: item.data.thumbnail}
+                        : require('../assets/empty.png')
+                    }
                     description={item.data.title}
                     info={item.data.created}
                   />
