@@ -5,11 +5,15 @@ import {
     Text,
     Image,
     Button,
+    StyleSheet,
+    StatusBar,
     ScrollView,
 } from 'react-native';
 import { useAuth } from '../utils/useauth';
-import { Card } from 'react-native-elements'
 import axios from 'axios';
+import CardPost from '../components/CardPost'
+import Header from '../navigation/Header';
+
 
 const list = () => {
     const auth = useAuth();
@@ -31,16 +35,80 @@ const list = () => {
     }, [])
     return (
         <>
-            <ScrollView>
-                {subs ? subs.map((item, index) => (<Card key={index}>
-                    <Card.Title style={{ color: 'black' }}>{item.data.display_name}</Card.Title>
-                    <Text style={{ color: 'black' }}>Subscribers : {item.data.subscribers}</Text>
-                    <Text style={{ color: 'black' }}>{item.data.display_name_prefixed}</Text>
-                    <Text style={{ color: 'black' }}>{item.data.description}</Text>
-                </Card>)) : <Text style={{ color: 'black' }}>no</Text>}
+            <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
+
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.container}>
+                    <Image
+                        style={styles.background}
+                        source={require('../assets/FrameOrange.png')}
+                    />
+                    <Header/>
+                    {subs ? subs.map((item, index) => (
+                        <>
+                            <CardPost
+                                key={index}
+                                mention="You are subbed to"
+                                r='/r/'
+                                title={item.data.display_name}
+                                avatar={item.data.community_icon ? { uri: item.data.community_icon.split("?")[0] } : require('../assets/reddit-avatar.png')}
+                                image={item.data.banner_background_image ? { uri: item.data.banner_background_image.split("?")[0] } : require('../assets/empty.png')}
+                                description={item.data.public_description}
+                                comments={item.data.subscribers}
+                                commentsMention=' subscribers'
+                            />
+                            <View style={styles.button}>
+                                <Button
+                                    color="rgba(255, 255, 255, 0.00)"
+                                    title="UNSUBSCRIBE"
+                                    onPress={() => {
+                                        console.log(index)
+                                        // auth.Authenticate();
+                                    }}></Button>
+                            </View>
+                        </>)) : <Text style={{ color: 'black' }}>no</Text>}
+                </View>
             </ScrollView>
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#101111',
+        flex: 1,
+        paddingHorizontal: 15
+    },
+    cardStyle: {
+        borderRadius: 6,
+        borderWidth: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+        shadowColor: 'rgba(0,0,0,0)',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0,
+    },
+    paragraph: {
+        color: '#FFF',
+        paddingLeft: 0,
+    },
+    background: {
+        position: 'absolute',
+        height: 200,
+        width: '100%',
+        zIndex: 0,
+        left: 0,
+        right: 0,
+    },
+    button: {
+        borderWidth: 2,
+        borderColor: 'rgba(255, 255, 255, 0.8)',
+        borderRadius: 30,
+        width: '80%',
+        alignSelf: 'center',
+    },
+});
 
 export default list;
