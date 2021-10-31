@@ -33,6 +33,9 @@ function useProvideAuth() {
     over_18: null,
     presence: null,
     nsfw: null,
+    beta: null,
+    autoplay: null,
+    e_p_message: null,
   });
 
   function Authenticate() {
@@ -61,11 +64,14 @@ function useProvideAuth() {
   function Prefs() {
     GetPrefs(token).then(res => {
       setPrefs({
-        lang: res.data.lang,
+        lang: res.data.country_code,
         pms: res.data.accept_pms,
         over_18: res.data.over_18,
         presence: res.data.show_presence,
         nsfw: res.data.label_nsfw,
+        beta: res.data.beta,
+        autoplay: res.data.video_autoplay,
+        e_p_message: res.data.email_private_message,
       });
     });
   }
