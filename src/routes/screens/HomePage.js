@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -13,39 +13,83 @@ import Header from '../navigation/Header';
 import axios from 'axios';
 import CardPost from '../components/CardPost';
 import MiniCards from '../components/MiniCards';
+import {useAuth} from '../utils/useauth';
 
 const HomePage = () => {
+  const auth = useAuth();
   const [posts, setPosts] = useState();
   const [bttIndex, setBtt] = useState(0);
   const [count, setCount] = useState(100);
 
   const map = {
-    0: { name: 'new', desc: 'DERNIÈRE PUBLICATION SUR' },
-    1: { name: 'rising', desc: 'PUBLICATION MONTANTE SUR' },
-    2: { name: 'best', desc: 'MEILLEURE PUBLICATION SUR' },
-    3: { name: 'top', desc: 'TOP PUBLICATION SUR' },
-    4: { name: 'hot', desc: 'HOT PUBLICATION SUR' },
+    0: {name: 'new', desc: 'NEW PUBLICATION ON'},
+    1: {name: 'rising', desc: 'RISING PUBLICATION ON'},
+    2: {name: 'best', desc: 'BEST PUBLICATION ON'},
+    3: {name: 'top', desc: 'TOP PUBLICATION ON'},
+    4: {name: 'hot', desc: 'HOT PUBLICATION ON'},
   };
   function load(e) {
     if (e == undefined) e = 0;
-    axios
-      .get('https://www.reddit.com/' + map[e].name + '.json?limit=100')
-      .then(response => {
-        setPosts(response.data.data.children);
-      })
-      .catch(error => {
-        setPosts();
-      });
+    if (!auth.token) {
+      axios
+        .get('https://www.reddit.com/' + map[e].name + '.json?limit=100')
+        .then(response => {
+          setPosts(response.data.data.children);
+        })
+        .catch(error => {
+          setPosts();
+        });
+    } else {
+      const options = {
+        method: 'GET',
+        url: 'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: 'Bearer ' + auth.token,
+        },
+      };
+      axios
+        .request(options)
+        .then(response => {
+          setPosts(response.data.data.children);
+          console.log(response.data.data.children);
+        })
+        .catch(error => {
+          console.log(error);
+          setPosts();
+        });
+    }
   }
   function reload() {
-    axios
-      .get('https://www.reddit.com/' + map[bttIndex].name + '.json?limit=100')
-      .then(response => {
-        setPosts(posts.concat(response.data.data.children));
-      })
-      .catch(error => {
-        setPosts();
-      });
+    if (!auth.token) {
+      axios
+        .get('https://www.reddit.com/' + map[bttIndex].name + '.json?limit=100')
+        .then(response => {
+          setPosts(posts.concat(response.data.data.children));
+        })
+        .catch(error => {
+          setPosts();
+        });
+    } else {
+      const options = {
+        method: 'GET',
+        url: 'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: 'Bearer ' + auth.token,
+        },
+      };
+      axios
+        .request(options)
+        .then(response => {
+          setPosts(response.data.data.children);
+          console.log(response.data.data.children);
+        })
+        .catch(error => {
+          console.log(error);
+          setPosts();
+        });
+    }
   }
   useEffect(() => {
     load();
@@ -70,10 +114,18 @@ const HomePage = () => {
                   paddingRight: 10,
                 },
               ]}>
-              <TouchableOpacity onPress={() => {setBtt(0); load(0) }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setBtt(0);
+                  load(0);
+                }}>
                 <MiniCards title="New" image={require('../assets/new.jpeg')} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {setBtt(1); load(1) }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setBtt(1);
+                  load(1);
+                }}>
                 <MiniCards
                   title="Rising"
                   image={require('../assets/rising.jpg')}
@@ -89,10 +141,18 @@ const HomePage = () => {
                   paddingRight: 10,
                 },
               ]}>
-              <TouchableOpacity onPress={() => {setBtt(2); load(2) }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setBtt(2);
+                  load(2);
+                }}>
                 <MiniCards title="Best" image={require('../assets/best.jpg')} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {setBtt(3); load(3) }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setBtt(3);
+                  load(3);
+                }}>
                 <MiniCards title="Top" image={require('../assets/top.jpg')} />
               </TouchableOpacity>
             </View>
@@ -105,8 +165,12 @@ const HomePage = () => {
                   paddingRight: 10,
                 },
               ]}>
-              <View style={{ marginBottom: 10 }}>
-                <TouchableOpacity onPress={() => {setBtt(4); load(4) }}>
+              <View style={{marginBottom: 10}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setBtt(4);
+                    load(4);
+                  }}>
                   <MiniCards title="Hot" image={require('../assets/hot.jpg')} />
                 </TouchableOpacity>
               </View>
@@ -121,7 +185,11 @@ const HomePage = () => {
                 mention={map[bttIndex].desc}
                 r="/r/"
                 title={item.data.subreddit}
-                image={item.data.thumbnail != "self" ? { uri: item.data.thumbnail } : require('../assets/empty.png')}
+                image={
+                  item.data.thumbnail != 'self'
+                    ? {uri: item.data.thumbnail}
+                    : require('../assets/empty.png')
+                }
                 description={item.data.title}
                 infos={item.data.created}
                 comments={item.data.num_comments}
@@ -131,7 +199,17 @@ const HomePage = () => {
           ) : (
             <></>
           )}
-          {posts ? <Button title="+" onPress={() => { reload(); setCount(count + 100) }} /> : <></>}
+          {posts ? (
+            <Button
+              title="+"
+              onPress={() => {
+                reload();
+                setCount(count + 100);
+              }}
+            />
+          ) : (
+            <></>
+          )}
         </View>
       </ScrollView>
     </View>
