@@ -1,4 +1,3 @@
-import {StylesContext} from '@material-ui/styles';
 import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
