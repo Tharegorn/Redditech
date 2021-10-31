@@ -86,7 +86,6 @@ const Search = () => {
             />
           </View>
         </View>
-
         <ScrollView>
           {infos == null ? (
             <View style={styles.illustration_position}>
