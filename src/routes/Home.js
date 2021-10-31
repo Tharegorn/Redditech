@@ -1,12 +1,12 @@
-import React, {useState, useEffect, StyleSheet} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, { useState, useEffect, StyleSheet } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomePage from './screens/HomePage';
 import Profile from './screens/Profile';
 import Connect from './screens/Connection';
 import Search from './screens/Search';
 import Settings from './screens/AccountSettings';
 import list from './screens/list';
-import {useAuth} from './utils/useauth';
+import { useAuth } from './utils/useauth';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
@@ -17,11 +17,11 @@ const Home = () => {
   return (
     <>
       <Tab.Navigator
-        tabBarOptions={{
-          activeTintColor: '#fff',
-          inactiveTintColor: 'lightgray',
-          activeBackgroundColor: '#000',
-          inactiveBackgroundColor: '#000',
+        screenOptions={{
+          tabBarActiveTintColor: '#fff',
+          tabBarInactiveTintColor: 'lightgray',
+          tabBarActiveBackgroundColor: '#000',
+          tabBarInactiveBackgroundColor: '#000',
         }}>
         <Tab.Screen
           name="Home"
@@ -29,7 +29,7 @@ const Home = () => {
           options={{
             headerShown: false,
             tabBarLabel: '',
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
           }}
@@ -53,7 +53,7 @@ const Home = () => {
               options={{
                 tabBarLabel: '',
                 headerShown: false,
-                tabBarIcon: ({color, size}) => (
+                tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="account"
                     color={color}
@@ -68,7 +68,7 @@ const Home = () => {
               options={{
                 tabBarLabel: '',
                 headerShown: false,
-                tabBarIcon: ({color, size}) => (
+                tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="account-settings-outline"
                     color={color}
@@ -83,7 +83,7 @@ const Home = () => {
               options={{
                 tabBarLabel: '',
                 headerShown: false,
-                tabBarIcon: ({color, size}) => (
+                tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="account-settings-outline"
                     color={color}
@@ -100,7 +100,7 @@ const Home = () => {
             options={{
               tabBarLabel: '',
               headerShown: false,
-              tabBarIcon: ({color, size}) => (
+              tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons
                   name="account-plus"
                   color={color}
