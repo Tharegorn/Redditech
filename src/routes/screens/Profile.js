@@ -90,8 +90,7 @@ const Profile = () => {
               fontSize: 20,
               lineHeight: 30,
             }}>
-            {' '}
-            ?{' '}
+            {auth.profile.num_comments}
           </Text>
           <Text
             style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
