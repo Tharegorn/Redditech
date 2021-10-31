@@ -1,4 +1,3 @@
-import { GetContent } from './TokenUtils'
 import axios from 'axios';
 
 async function GetProfile(token) {
@@ -24,7 +23,20 @@ async function GetPrefs(token) {
     };
     return await axios.request(options)
 }
+
+async function GetSubs(token) {
+    const options = {
+        method: 'GET',
+        url: 'https://oauth.reddit.com/subreddits/mine',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: "Bearer " + token,
+        },
+    };
+    return await axios.request(options);
+}
 module.exports = {
     GetProfile,
     GetPrefs,
+    GetSubs,
 }
