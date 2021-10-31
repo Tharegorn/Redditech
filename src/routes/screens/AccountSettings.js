@@ -1,12 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
     Text,
     Image,
 } from 'react-native';
 import { useAuth } from '../utils/useauth';
 import { Switch } from 'react-native-elements'
-import axios from 'axios';
 
 const Settings = () => {
     const auth = useAuth();
@@ -29,16 +28,21 @@ const Settings = () => {
         <>
             <Text style={{ color: 'black' }}>Change Profile settings</Text>
             <Text style={{ color: 'black' }}>Show presence : <Switch value={auth.prefs.presence} onValueChange={(e) => {
-                modify({'show_presence': e})
+                modify({ 'show_presence': e })
             }} /></Text>
             <Text style={{ color: 'black' }}>Over 18: <Switch value={auth.prefs.over_18} onValueChange={(e) => {
-                modify({'over_18': e})
+                modify({ 'over_18': e })
             }} /></Text>
             <Text style={{ color: 'black' }}>AutoPlay: <Switch value={auth.prefs.autoplay} onValueChange={(e) => {
-                modify({'video_autoplay': e})
+                modify({ 'video_autoplay': e })
+            }} /></Text>
+            <Text style={{ color: 'black' }}>Beta: <Switch value={auth.prefs.beta} onValueChange={(e) => {
+                modify({ 'beta': e })
+            }} /></Text>
+            <Text style={{ color: 'black' }}>Email Private Message: <Switch value={auth.prefs.e_p_message} onValueChange={(e) => {
+                modify({ 'email_private_message': e })
             }} /></Text>
             <Text style={{ color: 'black' }}>Country Code: {auth.prefs.lang}</Text>
-            <Text style={{ color: 'black' }}>Description: </Text>
         </>
     )
 }

@@ -1,7 +1,9 @@
 import { authorize } from 'react-native-app-auth';
+import CardPost from '../components/CardPost';
 
 
 const config = {
+    additionalParameters: {duration: 'permanent'},
     redirectUrl: 'com.newreddit://oauth2redirect/reddit',
     clientId: 'cJBN5Flkd8Uscn9w-SzI-A',
     clientSecret: '', // empty string - needed for iOS
@@ -21,7 +23,8 @@ async function GenToken() {
 
     try {
         const authState = await authorize(config);
-        return (await Promise.resolve({token: authState.accessToken, validity: authState.accessTokenExpirationDate}))
+        console.log(authState)
+        return (await Promise.resolve({token: authState.accessToken, validity: authState.accessTokenExpirationDate, refreshToken: authState.refreshToken}))
     } catch (e) {
     }
 
