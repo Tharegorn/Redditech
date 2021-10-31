@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -6,24 +6,42 @@ import {
   Button,
   StyleSheet,
   Image,
+  TouchableOpacity,
   StatusBar,
 } from 'react-native';
 import Header from '../navigation/Header';
 import axios from 'axios';
-import {ButtonGroup} from 'react-native-elements';
 import CardPost from '../components/CardPost';
 import MiniCards from '../components/MiniCards';
 
 const HomePage = () => {
   const [posts, setPosts] = useState();
-  const [bttIndex, setIndex] = useState(0);
-  const map = {0: 'new', 1: 'rising', 2: 'best', 3: 'top', 4: 'hot'};
+  const [bttIndex, setBtt] = useState(0);
+  const [count, setCount] = useState(100);
+
+  const map = {
+    0: { name: 'new', desc: 'DERNIÈRE PUBLICATION SUR' },
+    1: { name: 'rising', desc: 'PUBLICATION MONTANTE SUR' },
+    2: { name: 'best', desc: 'MEILLEURE PUBLICATION SUR' },
+    3: { name: 'top', desc: 'TOP PUBLICATION SUR' },
+    4: { name: 'hot', desc: 'HOT PUBLICATION SUR' },
+  };
   function load(e) {
     if (e == undefined) e = 0;
     axios
-      .get('https://www.reddit.com/' + map[e] + '.json?limit=100')
+      .get('https://www.reddit.com/' + map[e].name + '.json?limit=100')
       .then(response => {
         setPosts(response.data.data.children);
+      })
+      .catch(error => {
+        setPosts();
+      });
+  }
+  function reload() {
+    axios
+      .get('https://www.reddit.com/' + map[bttIndex].name + '.json?limit=100')
+      .then(response => {
+        setPosts(posts.concat(response.data.data.children));
       })
       .catch(error => {
         setPosts();
@@ -52,11 +70,15 @@ const HomePage = () => {
                   paddingRight: 10,
                 },
               ]}>
-              <MiniCards title="New" image={require('../assets/new.jpeg')} />
-              <MiniCards
-                title="Rising"
-                image={require('../assets/rising.jpg')}
-              />
+              <TouchableOpacity onPress={() => {setBtt(0); load(0) }}>
+                <MiniCards title="New" image={require('../assets/new.jpeg')} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {setBtt(1); load(1) }}>
+                <MiniCards
+                  title="Rising"
+                  image={require('../assets/rising.jpg')}
+                />
+              </TouchableOpacity>
             </View>
             <View
               style={[
@@ -67,8 +89,12 @@ const HomePage = () => {
                   paddingRight: 10,
                 },
               ]}>
-              <MiniCards title="Best" image={require('../assets/best.jpg')} />
-              <MiniCards title="Top" image={require('../assets/top.jpg')} />
+              <TouchableOpacity onPress={() => {setBtt(2); load(2) }}>
+                <MiniCards title="Best" image={require('../assets/best.jpg')} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {setBtt(3); load(3) }}>
+                <MiniCards title="Top" image={require('../assets/top.jpg')} />
+              </TouchableOpacity>
             </View>
             <View
               style={[
@@ -79,8 +105,10 @@ const HomePage = () => {
                   paddingRight: 10,
                 },
               ]}>
-              <View style={{marginBottom: 10}}>
-                <MiniCards title="Hot" image={require('../assets/hot.jpg')} />
+              <View style={{ marginBottom: 10 }}>
+                <TouchableOpacity onPress={() => {setBtt(4); load(4) }}>
+                  <MiniCards title="Hot" image={require('../assets/hot.jpg')} />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -90,10 +118,10 @@ const HomePage = () => {
               <CardPost
                 key={index}
                 avatar={require('../assets/reddit-avatar.png')}
-                mention="DERNIÈRE PUBLICATION SUR"
+                mention={map[bttIndex].desc}
                 r="/r/"
                 title={item.data.subreddit}
-                image={require('../assets/empty.png')}
+                image={item.data.thumbnail != "self" ? { uri: item.data.thumbnail } : require('../assets/empty.png')}
                 description={item.data.title}
                 infos={item.data.created}
                 comments={item.data.num_comments}
@@ -101,8 +129,9 @@ const HomePage = () => {
               />
             ))
           ) : (
-            <Text>Nothing</Text>
+            <></>
           )}
+          {posts ? <Button title="+" onPress={() => { reload(); setCount(count + 100) }} /> : <></>}
         </View>
       </ScrollView>
     </View>
