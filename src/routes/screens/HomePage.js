@@ -42,7 +42,8 @@ const HomePage = () => {
     } else {
       const options = {
         method: 'GET',
-        url: 'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
+        url:
+          'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer ' + auth.token,
@@ -73,7 +74,8 @@ const HomePage = () => {
     } else {
       const options = {
         method: 'GET',
-        url: 'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
+        url:
+          'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer ' + auth.token,
@@ -94,7 +96,7 @@ const HomePage = () => {
     load();
   }, []);
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: '#101111'}}>
       <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>

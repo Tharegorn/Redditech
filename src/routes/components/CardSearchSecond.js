@@ -10,28 +10,31 @@ export default function CardSearchSecond({
 }) {
   return (
     <>
-      <View style={styles.padder}>
-        <View style={styles.card}>
-          <View style={[{flexDirection: 'row'}]}>
-            <Image style={styles.cardImage} source={image} />
-            <View style={styles.cardInside}>
-              <View style={styles.viewHorizontal}>
-                <Text style={styles.subTitle}>{r}</Text>
-                <Text style={styles.subTitle}>{titler}</Text>
-              </View>
-              <Text
-                numberOfLines={3}
-                ellipsizeMode="tail"
-                style={styles.cardTitle}>
-                {description}
-              </Text>
-              <View style={{position: 'absolute', bottom: 15, paddingLeft: 15}}>
-                <Text>{info}</Text>
+      <TouchableOpacity>
+        <View style={styles.padder}>
+          <View style={styles.card}>
+            <View style={[{flexDirection: 'row'}]}>
+              <Image style={styles.cardImage} source={image} />
+              <View style={styles.cardInside}>
+                <View style={styles.viewHorizontal}>
+                  <Text style={styles.subTitle}>{r}</Text>
+                  <Text style={styles.subTitle}>{titler}</Text>
+                </View>
+                <Text
+                  numberOfLines={3}
+                  ellipsizeMode="tail"
+                  style={styles.cardTitle}>
+                  {description}
+                </Text>
+                <View
+                  style={{position: 'absolute', bottom: 15, paddingLeft: 15}}>
+                  <Text>{info}</Text>
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </>
   );
 }
