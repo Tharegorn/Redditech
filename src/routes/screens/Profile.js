@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     width: 145,
     borderRadius: 300,
     borderWidth: 6,
-    borderColor: '#101111',
+    borderColor: 'rgba(000, 000, 000, 0.6)',
   },
   icon: {
     width: 21,

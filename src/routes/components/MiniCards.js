@@ -8,7 +8,7 @@ export default function MiniCards({title, image}) {
     <>
       <View style={styles.padder}>
         <TouchableOpacity style={styles.card}>
-          <View style={[{flexDirection: 'row', paddingBottom: 5}]}>
+          <View style={[{flexDirection: 'row', marginBottom: 5}]}>
             <Image style={styles.cardImage} source={image} />
             <View style={{marginVertical: 15, marginHorizontal: 10}}>
               <Text style={{fontFamily: 'Gotham-Bold', color: '#FFF'}}>
