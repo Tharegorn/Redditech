@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {Button} from 'react-native-elements';
 import Animated from 'react-native-reanimated';
 
 export default function MiniCards({title, image}) {
@@ -7,7 +8,7 @@ export default function MiniCards({title, image}) {
     <>
       <View style={styles.padder}>
         <TouchableOpacity style={styles.card}>
-          <Animated.View style={[{flexDirection: 'row', paddingBottom: 5}]}>
+          <View style={[{flexDirection: 'row', paddingBottom: 5}]}>
             <Image style={styles.cardImage} source={image} />
             <View style={{marginVertical: 15, marginHorizontal: 10}}>
               <Text style={{fontFamily: 'Gotham-Bold', color: '#FFF'}}>
@@ -15,7 +16,7 @@ export default function MiniCards({title, image}) {
                 {title}
               </Text>
             </View>
-          </Animated.View>
+          </View>
         </TouchableOpacity>
       </View>
     </>

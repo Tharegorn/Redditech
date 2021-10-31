@@ -27,7 +27,7 @@ export default function CardPost({
           </View>
         </View>
         <TouchableOpacity style={styles.card}>
-          <Animated.View>
+          <View>
             <View style={[{flexDirection: 'row'}]}>
               <Image style={styles.cardImage} source={image} />
               <View style={styles.cardInside}>
@@ -47,7 +47,7 @@ export default function CardPost({
                 </View>
               </View>
             </View>
-          </Animated.View>
+          </View>
         </TouchableOpacity>
       </View>
     </>
