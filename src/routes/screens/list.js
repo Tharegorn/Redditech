@@ -12,33 +12,32 @@ import {useAuth} from '../utils/useauth';
 import axios from 'axios';
 import CardPost from '../components/CardPost';
 import Header from '../navigation/Header';
-import { unsubscribe } from '../utils/PostReddit';
+import {unsubscribe} from '../utils/PostReddit';
 
 const list = () => {
   const auth = useAuth();
   const [subs, setSubs] = useState(null);
-  // useEffect(() => {
-    const options = {
-      method: 'GET',
-      url: 'https://oauth.reddit.com/subreddits/mine',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + auth.token,
-      },
-    };
-    axios
-      .request(options)
-      .then(res => {
+  const options = {
+    method: 'GET',
+    url: 'https://oauth.reddit.com/subreddits/mine',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: 'Bearer ' + auth.token,
+    },
+  };
+  axios
+    .request(options)
+    .then(res => {
+      if (res.data.data.children.length > 0) {
         setSubs(res.data.data.children);
-      })
-      .catch(e => {
-        console.error(e);
-      });
-  // }, []);
+      } else setSubs(null);
+    })
+    .catch(e => {
+      console.error(e);
+    });
   return (
     <>
       <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
-
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <Image
@@ -78,7 +77,18 @@ const list = () => {
               </View>
             ))
           ) : (
-            <Text style={{color: 'black'}}>no</Text>
+            <View style={styles.container}>
+              <View style={styles.illustration_position}>
+                <Image
+                  style={styles.illustration}
+                  source={require('../assets/illustrationSearch.png')}
+                />
+                <Text style={styles.text_position}>
+                  Enter in the world of Reddit {'\n'}
+                  with a simple search.
+                </Text>
+              </View>
+            </View>
           )}
         </View>
       </ScrollView>
@@ -121,6 +131,23 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '80%',
     alignSelf: 'center',
+  },
+  illustration_position: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: '25%',
+  },
+  illustration: {
+    width: 50,
+    height: 50,
+    alignSelf: 'center',
+  },
+  illustration_position: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: '25%',
   },
 });
 
