@@ -1,12 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import {
     Text,
     Image,
 } from 'react-native';
 import { useAuth } from '../utils/useauth';
 import { Switch } from 'react-native-elements'
-import axios from 'axios';
 
 const Settings = () => {
     const auth = useAuth();
