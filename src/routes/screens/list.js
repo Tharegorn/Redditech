@@ -37,14 +37,11 @@ const list = () => {
     });
   return (
     <>
-      <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
-          <Image
-            style={styles.background}
-            source={require('../assets/FrameOrange.png')}
-          />
-          <Header />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.mention}>Library</Text>
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {subs ? (
             subs.map((item, index) => (
               <View key={index}>
@@ -78,20 +75,15 @@ const list = () => {
             ))
           ) : (
             <View style={styles.container}>
-              <View style={styles.illustration_position}>
-                <Image
-                  style={styles.illustration}
-                  source={require('../assets/illustrationSearch.png')}
-                />
-                <Text style={styles.text_position}>
-                  Enter in the world of Reddit {'\n'}
-                  with a simple search.
-                </Text>
-              </View>
+              <Text style={styles.text_position}>
+                Enter in the world of Reddit {'\n'}
+                with a simple search.
+              </Text>
             </View>
           )}
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
+      <View />
     </>
   );
 };
@@ -100,18 +92,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#101111',
     flex: 1,
-    paddingHorizontal: 15,
   },
   cardStyle: {
     borderRadius: 6,
     borderWidth: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    backgroundColor: 'rgba(255, 255, 255, 0.01)',
     shadowColor: 'rgba(0,0,0,0)',
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0,
   },
   paragraph: {
     color: '#FFF',
@@ -119,18 +109,17 @@ const styles = StyleSheet.create({
   },
   background: {
     position: 'absolute',
-    height: 200,
+    height: 130,
     width: '100%',
     zIndex: 0,
     left: 0,
     right: 0,
   },
   button: {
-    borderWidth: 2,
+    width: 120,
     borderColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: 30,
-    width: '80%',
-    alignSelf: 'center',
+    paddingLeft: 2,
   },
   illustration_position: {
     flex: 1,
@@ -148,6 +137,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     marginTop: '25%',
+  },
+  header: {
+    paddingHorizontal: 15,
+    paddingBottom: 20,
+    paddingTop: 60,
+    backgroundColor: 'rgba(16, 17, 17, 0.1)',
+  },
+  mention: {
+    fontFamily: 'Gotham-Bold',
+    fontSize: 30,
+    color: '#FFF',
   },
 });
 

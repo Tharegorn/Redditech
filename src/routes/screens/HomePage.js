@@ -201,13 +201,18 @@ const HomePage = () => {
             <></>
           )}
           {posts ? (
-            <Button
-              title="+"
-              onPress={() => {
-                reload();
-                setCount(count + 100);
-              }}
-            />
+            <View style={{paddingTop: 10, marginBottom: 20}}>
+              <View style={styles.button}>
+                <Button
+                  color="rgba(255, 255, 255, 0.00)"
+                  title="Discover more"
+                  onPress={() => {
+                    reload();
+                    setCount(count + 100);
+                  }}
+                />
+              </View>
+            </View>
           ) : (
             <></>
           )}
@@ -244,6 +249,12 @@ const styles = StyleSheet.create({
     zIndex: 0,
     left: 0,
     right: 0,
+  },
+  button: {
+    borderRadius: 30,
+    width: '80%',
+    alignSelf: 'center',
+    fontFamily: 'Gothom-Bold',
   },
 });
 

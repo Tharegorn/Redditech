@@ -96,5 +96,6 @@ const styles = StyleSheet.create({
     height: 40,
     marginRight: 10,
     marginTop: 11,
+    borderRadius: 30,
   },
 });
