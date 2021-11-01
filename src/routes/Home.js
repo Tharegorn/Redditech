@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
-const Home = () => {
+function Home({}) {
   const auth = useAuth();
 
   return (
@@ -98,6 +98,6 @@ const Home = () => {
       </Tab.Navigator>
     </>
   );
-};
+}
 
 export default Home;

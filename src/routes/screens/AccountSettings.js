@@ -79,7 +79,7 @@ const Settings = () => {
         <View style={styles.padder}>
           <Text style={styles.title}>Privacy</Text>
 
-          <View style={styles.containerCard}>
+          <View style={styles.containerCardSecond}>
             <View style={styles.innerPadder}>
               <Text style={styles.textToSet}>
                 Show presence :{' '}
@@ -90,32 +90,36 @@ const Settings = () => {
                   }}
                 />
               </Text>
-              <Text style={styles.textToSet}>
-                Email Private Message:{' '}
-                <Switch
-                  value={auth.prefs.e_p_message}
-                  onValueChange={e => {
-                    modify({email_private_message: e});
-                  }}
-                />
-              </Text>
-              <View style={{paddingBottom: 5}}>
+              <View style={{paddingBottom: 15}}>
+                <Text style={styles.textToSet}>
+                  Email Private Message:{' '}
+                  <Switch
+                    value={auth.prefs.e_p_message}
+                    onValueChange={e => {
+                      modify({email_private_message: e});
+                    }}
+                  />
+                </Text>
+              </View>
+              <View style={{paddingBottom: 15}}>
                 <Text style={styles.textToSet}>
                   Country Code: {auth.prefs.lang}
                 </Text>
               </View>
-              <View style={{height: 30}}>
-                <ScrollView>
-                  {countries.map((item, index) => (
-                    <TouchableOpacity
-                      onPress={() => modify({country_code: item.code})}
-                      key={index}>
-                      <View style={{marginBottom: 4}}>
-                        <Text style={styles.textToSet}>{item.code}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
+              <View style={{height: 40}}>
+                <View style={styles.borderStyle}>
+                  <ScrollView showsVerticalScrollIndicator={false}>
+                    {countries.map((item, index) => (
+                      <TouchableOpacity
+                        onPress={() => modify({country_code: item.code})}
+                        key={index}>
+                        <View style={{marginBottom: 7}}>
+                          <Text style={styles.textInner}>{item.code}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    ))}
+                  </ScrollView>
+                </View>
               </View>
             </View>
           </View>
@@ -174,6 +178,26 @@ const styles = StyleSheet.create({
   },
   innerPadder: {
     padding: 10,
+  },
+  borderStyle: {
+    borderWidth: 1,
+    borderRadius: 6,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+    paddingLeft: 10,
+  },
+  textInner: {
+    fontFamily: 'GothamBook',
+    fontSize: 16,
+    color: '#FFF',
+    paddingTop: 10,
+  },
+  containerCardSecond: {
+    height: 210,
+    borderRadius: 6,
+    borderRadius: 6,
+    borderWidth: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    marginTop: 15,
   },
 });
 export default Settings;
