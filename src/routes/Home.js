@@ -31,7 +31,7 @@ const Home = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: ({color, size}) => (
-              <Icon name="explore" size={20} color="#FFF" />
+              <Icon name="explore" size={28} color="#FFF" />
             ),
           }}
         />
@@ -42,7 +42,7 @@ const Home = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: ({color, size}) => (
-              <Icon name="search" size={22} color="#FFF" />
+              <Icon name="search" size={30} color="#FFF" />
             ),
           }}
         />
@@ -55,7 +55,7 @@ const Home = () => {
                 tabBarLabel: '',
                 headerShown: false,
                 tabBarIcon: ({color, size}) => (
-                  <Icon name="face" size={20} color="#FFF" />
+                  <Icon name="face" size={30} color="#FFF" />
                 ),
               }}
             />
@@ -66,7 +66,7 @@ const Home = () => {
                 tabBarLabel: '',
                 headerShown: false,
                 tabBarIcon: ({color, size}) => (
-                  <Icon name="build" size={20} color="#FFF" />
+                  <Icon name="build" size={25} color="#FFF" />
                 ),
               }}
             />
@@ -77,7 +77,7 @@ const Home = () => {
                 tabBarLabel: '',
                 headerShown: false,
                 tabBarIcon: ({color, size}) => (
-                  <Icon name="favorite-outline" size={20} color="#FFF" />
+                  <Icon name="favorite-outline" size={25} color="#FFF" />
                 ),
               }}
             />
@@ -90,7 +90,7 @@ const Home = () => {
               tabBarLabel: '',
               headerShown: false,
               tabBarIcon: ({color, size}) => (
-                <Icon name="face" size={20} color="#FFF" />
+                <Icon name="face" size={25} color="#FFF" />
               ),
             }}
           />
