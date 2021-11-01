@@ -1,7 +1,15 @@
 import React, {useEffect} from 'react';
-import {Text, Image, View, StyleSheet} from 'react-native';
+import {
+  Text,
+  Image,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {useAuth} from '../utils/useauth';
 import {Switch} from 'react-native-elements';
+import countries from './country';
 
 const Settings = () => {
   const auth = useAuth();
@@ -56,7 +64,7 @@ const Settings = () => {
               </Text>
               <View>
                 <Text style={styles.textToSet}>
-                  flexDirection: 'column' Beta:{' '}
+                  flexDirection: 'column' :) Beta:{' '}
                   <Switch
                     value={auth.prefs.beta}
                     onValueChange={e => {
@@ -91,9 +99,24 @@ const Settings = () => {
                   }}
                 />
               </Text>
-              <Text style={styles.textToSet}>
-                Country Code: {auth.prefs.lang}
-              </Text>
+              <View style={{paddingBottom: 5}}>
+                <Text style={styles.textToSet}>
+                  Country Code: {auth.prefs.lang}
+                </Text>
+              </View>
+              <View style={{height: 30}}>
+                <ScrollView>
+                  {countries.map((item, index) => (
+                    <TouchableOpacity
+                      onPress={() => modify({country_code: item.code})}
+                      key={index}>
+                      <View style={{marginBottom: 4}}>
+                        <Text style={styles.textToSet}>{item.code}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
             </View>
           </View>
         </View>
