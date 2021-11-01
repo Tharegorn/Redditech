@@ -31,7 +31,7 @@ const Home = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: ({color, size}) => (
-              <Icon name="explore" size={28} color="#FFF" />
+              <MaterialCommunityIcons name="home" color={color} size={30} />
             ),
           }}
         />
@@ -66,7 +66,7 @@ const Home = () => {
                 tabBarLabel: '',
                 headerShown: false,
                 tabBarIcon: ({color, size}) => (
-                  <Icon name="build" size={25} color="#FFF" />
+                  <Icon name="build" size={21} color="#FFF" />
                 ),
               }}
             />
