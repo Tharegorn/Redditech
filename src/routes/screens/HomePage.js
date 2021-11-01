@@ -84,7 +84,7 @@ const HomePage = () => {
       axios
         .request(options)
         .then(response => {
-          setPosts(response.data.data.children);
+          setPosts(posts.concat(response.data.data.children));
         })
         .catch(error => {
           console.log(error);
