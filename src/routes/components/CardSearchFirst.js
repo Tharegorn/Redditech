@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import Animated from 'react-native-reanimated';
 
-export default function CardPost({
+export default function CardSearchFirst({
   avatar,
   mention,
   r,
-  title,
+  titler,
+  follow,
   image,
-  description,
-  infos,
-  comments,
-  commentsMention,
+  online,
+  mentionFollow,
+  mentionOnline,
+  imageOnline,
 }) {
   return (
     <>
@@ -22,33 +22,47 @@ export default function CardPost({
             <Text>{mention}</Text>
             <View style={styles.viewHorizontal}>
               <Text style={styles.subTitle}>{r}</Text>
-              <Text style={styles.subTitle}>{title}</Text>
+              <Text style={styles.subTitle}>{titler}</Text>
             </View>
           </View>
         </View>
-        <TouchableOpacity style={styles.card}>
-          <View>
-            <View style={[{flexDirection: 'row'}]}>
-              <Image style={styles.cardImage} source={image} />
-              <View style={styles.cardInside}>
+        <View style={styles.card}>
+          <View style={[{flexDirection: 'row'}]}>
+            <Image style={styles.cardImage} source={image} />
+            <View style={styles.cardInside}>
+              <Text
+                style={{
+                  fontFamily: 'GothamBook',
+                  fontSize: 18,
+                  paddingBottom: 5,
+                }}>
+                {follow}
+              </Text>
+              <Text style={styles.cardTitle}>{mentionFollow}</Text>
+
+              <View style={{position: 'absolute', bottom: 5, paddingLeft: 15}}>
                 <Text
-                  numberOfLines={3}
-                  ellipsizeMode="tail"
-                  style={styles.cardTitle}>
-                  {description}
+                  style={{
+                    fontFamily: 'GothamBook',
+                    fontSize: 14,
+                    paddingBottom: 5,
+                  }}>
+                  {mentionOnline}
                 </Text>
                 <View
-                  style={{position: 'absolute', bottom: 15, paddingLeft: 15}}>
-                  <Text style={{paddingBottom: 10}}>{infos}</Text>
-                  <View style={styles.viewHorizontal}>
-                    <Text style={{opacity: 0.5}}>{comments}</Text>
-                    <Text style={{opacity: 0.5}}>{commentsMention}</Text>
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{paddingBottom: 10}}>{online}</Text>
+                  <View style={{marginLeft: 5, marginBottom: 10}}>
+                    <Image style={styles.imageOnline} source={imageOnline} />
                   </View>
                 </View>
               </View>
             </View>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     </>
   );
@@ -64,7 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   padder: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     paddingVertical: 5,
   },
   padderMention: {
@@ -83,7 +97,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: 150,
-    height: 150,
+    height: 130,
     borderBottomLeftRadius: 6,
     borderTopLeftRadius: 6,
   },
@@ -96,6 +110,9 @@ const styles = StyleSheet.create({
     height: 40,
     marginRight: 10,
     marginTop: 11,
-    borderRadius: 30,
+  },
+  imageOnline: {
+    height: 10,
+    width: 10,
   },
 });

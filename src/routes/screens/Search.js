@@ -13,8 +13,10 @@ import {SearchBar} from 'react-native-elements';
 import {useAuth} from '../utils/useauth';
 import {Card} from 'react-native-elements';
 import axios from 'axios';
-import SearchBarComponent from '../components/SearchBar';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import CardPost from '../components/CardPost';
+import CardSearchFirst from '../components/CardSearchFirst';
+import CardSearchSecond from '../components/CardSearchSecond';
 
 const Search = () => {
   const auth = useAuth();
@@ -38,6 +40,7 @@ const Search = () => {
             followers: data.subscribers,
             online: data.active_user_count,
             description: data.public_description,
+            icon: data.community_icon
           });
         } else {
           setInfos(null);
@@ -76,7 +79,7 @@ const Search = () => {
           </View>
           <View style={{paddingLeft: 10}}>
             <TextInput
-              placeholder="Search on Reddit"
+              placeholder="Search on Reddit                                     "
               onChangeText={e => {
                 change(e);
               }}
@@ -99,52 +102,34 @@ const Search = () => {
           ) : (
             <>
               <TouchableOpacity onPress={() => getPosts()}>
-                <Card>
-                  <Card.FeaturedTitle>{infos.name}</Card.FeaturedTitle>
-                  <Card.Title>{infos.sub_name}</Card.Title>
-                  <Card.Title>Follows : {infos.followers}</Card.Title>
-                  <Card.Title>Online : {infos.online}</Card.Title>
-                  <Card.Divider />
-                  <Card.Image
-                    source={{uri: infos.header}}
-                    style={{height: 100}}
-                  />
-                  <Text>Description : {infos.description}</Text>
-                  {bttProps == 'connect' ? (
-                    <Button
-                      title="Connect to reddit account"
-                      onPress={() => {
-                        auth.Authenticate();
-                        setSearch('');
-                        setInfos(null);
-                      }}></Button>
-                  ) : (
-                    <Text style={{color: 'black'}}>
-                      Faut faire le bouton pour sub
-                    </Text>
-                  )}
-                </Card>
+                <CardSearchFirst
+                  avatar={require('../assets/reddit-avatar.png')}
+                  mention="MORE INSIDE"
+                  r="/r/"
+                  titler={infos.name}
+                  image={infos.icon ? {uri: infos.icon.split("?")[0]} :require('../assets/empty.png')}
+                  follow={infos.followers}
+                  mentionFollow="Followers"
+                  mentionOnline="Online Redditors"
+                  online={infos.online}
+                  imageOnline={require('../assets/online.png')}
+                />
               </TouchableOpacity>
+              <View style={{padding: 5}}></View>
               {posts ? (
                 posts.map((item, index) => (
-                  <Card key={index}>
-                    <Card.Title>/r/{item.data.subreddit}</Card.Title>
-                    <Card.Title>{item.data.title}</Card.Title>
-                    <Card.Title>{item.data.created}</Card.Title>
-                    <Card.Divider />
-                    {item.data.thumbnail ? (
-                      <Card.Image
-                        source={{uri: item.data.thumbnail}}
-                        style={{
-                          height: item.data.thumbnail_height,
-                          width: item.data.thumbnail_width,
-                        }}></Card.Image>
-                    ) : (
-                      <Text>NoImage</Text>
-                    )}
-                    {/* <Text>https://reddit.com{item.data.permalink}</Text> */}
-                    <Text>{item.data.num_comments} Comments</Text>
-                  </Card>
+                  <CardSearchSecond
+                    key={index}
+                    r="/r/"
+                    titler={infos.name}
+                    image={
+                      item.data.thumbnail != 'self'
+                        ? {uri: item.data.thumbnail}
+                        : require('../assets/empty.png')
+                    }
+                    description={item.data.title}
+                    info={item.data.created}
+                  />
                 ))
               ) : (
                 <Text></Text>

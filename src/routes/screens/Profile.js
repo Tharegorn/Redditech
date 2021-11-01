@@ -1,13 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {Text, Image, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Button} from 'react-native-elements/dist/buttons/Button';
+import {
+  Text,
+  Image,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+  ScrollView,
+} from 'react-native';
 import {useAuth} from '../utils/useauth';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import App from '../../../App';
 
 const Profile = () => {
   const auth = useAuth();
   useEffect(() => {
     auth.Profile();
   }, []);
+
   return (
     <View style={{backgroundColor: '#101111', flex: 1}}>
       {auth.profile.profile_banner ? (
@@ -42,77 +53,79 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {auth.profile.profile_pic ? (
-        <View style={styles.avatarPosition}>
-          <Image
-            source={{uri: auth.profile.profile_pic}}
-            style={styles.avatar}
-          />
+      <ScrollView>
+        {auth.profile.profile_pic ? (
+          <View style={styles.avatarPosition}>
+            <Image
+              source={{uri: auth.profile.profile_pic}}
+              style={styles.avatar}
+            />
+          </View>
+        ) : (
+          <></>
+        )}
+        <Text style={styles.nameStyle2}>{auth.profile.name}</Text>
+        <Text style={styles.nameURL}>{auth.profile.url}</Text>
+        <Text
+          style={{
+            fontFamily: 'GothamBook',
+            color: '#F0FAFF',
+            textAlign: 'center',
+            paddingTop: 10,
+            marginHorizontal: 30,
+            marginTop: 10,
+            lineHeight: 20,
+          }}>
+          {auth.profile.desc}
+        </Text>
+        <View style={styles.containerInfos}>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text
+              style={{
+                color: 'white',
+                fontFamily: 'Gotham-Bold',
+                fontSize: 20,
+                lineHeight: 30,
+              }}>
+              {auth.profile.karma}
+            </Text>
+            <Text
+              style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
+              karma
+            </Text>
+          </View>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text
+              style={{
+                color: 'white',
+                fontFamily: 'Gotham-Bold',
+                fontSize: 20,
+                lineHeight: 30,
+              }}>
+              {auth.profile.num_comments}
+            </Text>
+            <Text
+              style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
+              comments
+            </Text>
+          </View>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text
+              style={{
+                color: 'white',
+                fontFamily: 'Gotham-Bold',
+                fontSize: 20,
+                lineHeight: 30,
+              }}>
+              {auth.profile.coins}
+            </Text>
+            <Text
+              style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
+              coins{' '}
+            </Text>
+          </View>
         </View>
-      ) : (
-        <></>
-      )}
-      <Text style={styles.nameStyle2}>{auth.profile.name}</Text>
-      <Text style={styles.nameURL}>{auth.profile.url}</Text>
-      <Text
-        style={{
-          fontFamily: 'GothamBook',
-          color: '#F0FAFF',
-          textAlign: 'center',
-          paddingTop: 10,
-          marginHorizontal: 30,
-          marginTop: 10,
-          lineHeight: 20,
-        }}>
-        {auth.profile.desc}
-      </Text>
-      <View style={styles.containerInfos}>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text
-            style={{
-              color: 'white',
-              fontFamily: 'Gotham-Bold',
-              fontSize: 20,
-              lineHeight: 30,
-            }}>
-            {auth.profile.karma}
-          </Text>
-          <Text
-            style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
-            karma
-          </Text>
-        </View>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text
-            style={{
-              color: 'white',
-              fontFamily: 'Gotham-Bold',
-              fontSize: 20,
-              lineHeight: 30,
-            }}>
-            {auth.profile.num_comments}
-          </Text>
-          <Text
-            style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
-            comments
-          </Text>
-        </View>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text
-            style={{
-              color: 'white',
-              fontFamily: 'Gotham-Bold',
-              fontSize: 20,
-              lineHeight: 30,
-            }}>
-            {auth.profile.coins}
-          </Text>
-          <Text
-            style={{color: 'white', fontFamily: 'Gotham-Thin', fontSize: 18}}>
-            coins{' '}
-          </Text>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -154,7 +167,7 @@ const styles = StyleSheet.create({
     width: 145,
     borderRadius: 300,
     borderWidth: 6,
-    borderColor: '#101111',
+    borderColor: 'rgba(000, 000, 000, 0.6)',
   },
   icon: {
     width: 21,

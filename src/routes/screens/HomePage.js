@@ -42,7 +42,8 @@ const HomePage = () => {
     } else {
       const options = {
         method: 'GET',
-        url: 'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
+        url:
+          'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer ' + auth.token,
@@ -52,10 +53,8 @@ const HomePage = () => {
         .request(options)
         .then(response => {
           setPosts(response.data.data.children);
-          console.log(response.data.data.children);
         })
         .catch(error => {
-          console.log(error);
           setPosts();
         });
     }
@@ -73,7 +72,8 @@ const HomePage = () => {
     } else {
       const options = {
         method: 'GET',
-        url: 'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
+        url:
+          'https://oauth.reddit.com/' + map[bttIndex].name + '.json?limit=100',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer ' + auth.token,
@@ -82,10 +82,9 @@ const HomePage = () => {
       axios
         .request(options)
         .then(response => {
-          setPosts(response.data.data.children);
+          setPosts(posts.concat(response.data.data.children));
         })
         .catch(error => {
-          console.log(error);
           setPosts();
         });
     }
@@ -94,7 +93,7 @@ const HomePage = () => {
     load();
   }, []);
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: '#101111'}}>
       <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
@@ -199,13 +198,18 @@ const HomePage = () => {
             <></>
           )}
           {posts ? (
-            <Button
-              title="+"
-              onPress={() => {
-                reload();
-                setCount(count + 100);
-              }}
-            />
+            <View style={{paddingTop: 10, marginBottom: 20}}>
+              <View style={styles.button}>
+                <Button
+                  color="rgba(255, 255, 255, 0.00)"
+                  title="Discover more"
+                  onPress={() => {
+                    reload();
+                    setCount(count + 100);
+                  }}
+                />
+              </View>
+            </View>
           ) : (
             <></>
           )}
@@ -242,6 +246,12 @@ const styles = StyleSheet.create({
     zIndex: 0,
     left: 0,
     right: 0,
+  },
+  button: {
+    borderRadius: 30,
+    width: '80%',
+    alignSelf: 'center',
+    fontFamily: 'Gothom-Bold',
   },
 });
 

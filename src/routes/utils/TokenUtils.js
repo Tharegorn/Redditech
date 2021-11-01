@@ -1,5 +1,4 @@
 import { authorize } from 'react-native-app-auth';
-import CardPost from '../components/CardPost';
 
 
 const config = {
@@ -23,7 +22,6 @@ async function GenToken() {
 
     try {
         const authState = await authorize(config);
-        console.log(authState)
         return (await Promise.resolve({token: authState.accessToken, validity: authState.accessTokenExpirationDate, refreshToken: authState.refreshToken}))
     } catch (e) {
     }

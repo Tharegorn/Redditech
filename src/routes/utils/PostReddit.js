@@ -4,7 +4,6 @@ function unsubscribe(name, token) {
     action: 'unsub',
     api_type: 'json',
   };
-  console.log(token);
   fetch(
     'https://oauth.reddit.com/api/subscribe?redditWebClient=desktop2x&app=desktop2x-client-production&raw_json=1&gilding_detail=1',
     {
@@ -18,10 +17,8 @@ function unsubscribe(name, token) {
     },
   )
     .then(r => {
-      console.log(r);
     })
     .catch(e => {
-      console.log(e);
     });
 }
 
