@@ -53,10 +53,8 @@ const HomePage = () => {
         .request(options)
         .then(response => {
           setPosts(response.data.data.children);
-          console.log(response.data.data.children);
         })
         .catch(error => {
-          console.log(error);
           setPosts();
         });
     }
@@ -87,7 +85,6 @@ const HomePage = () => {
           setPosts(posts.concat(response.data.data.children));
         })
         .catch(error => {
-          console.log(error);
           setPosts();
         });
     }

@@ -22,7 +22,6 @@ async function GenToken() {
 
     try {
         const authState = await authorize(config);
-        console.log(authState)
         return (await Promise.resolve({token: authState.accessToken, validity: authState.accessTokenExpirationDate, refreshToken: authState.refreshToken}))
     } catch (e) {
     }

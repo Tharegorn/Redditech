@@ -32,7 +32,6 @@ const Search = () => {
       .then(response => {
         const data = response.data.data;
         if (data.url != null) {
-          console.log(response.data.data);
           setInfos({
             accept_follows: data.accept_followers,
             name: data.title,
