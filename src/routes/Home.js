@@ -1,14 +1,26 @@
-import React, {useState, useEffect, StyleSheet} from 'react';
+import React, {useState, useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomePage from './screens/HomePage';
 import Profile from './screens/Profile';
 import Connect from './screens/Connection';
 import Search from './screens/Search';
-import Settings from './screens/AccountSettings';
 import list from './screens/list';
 import {useAuth} from './utils/useauth';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import {
+  SafeAreaView,
+  StatusBar,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  Button,
+  Image,
+} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,85 +29,84 @@ function Home({}) {
 
   return (
     <>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: '#fff',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarActiveBackgroundColor: '#000',
-          tabBarInactiveBackgroundColor: '#000',
-        }}>
-        <Tab.Screen
-          name="Home"
-          component={HomePage}
-          options={{
-            headerShown: false,
-            tabBarLabel: '',
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={30} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Search"
-          component={Search}
-          options={{
-            headerShown: false,
-            tabBarLabel: '',
-            tabBarIcon: ({color, size}) => (
-              <Icon name="search" size={30} color="#FFF" />
-            ),
-          }}
-        />
-        {auth.token != null ? (
-          <>
-            <Tab.Screen
-              name="Profile"
-              component={Profile}
-              options={{
-                tabBarLabel: '',
-                headerShown: false,
-                tabBarIcon: ({color, size}) => (
-                  <Icon name="face" size={30} color="#FFF" />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Settings"
-              component={Settings}
-              options={{
-                tabBarLabel: '',
-                headerShown: false,
-                tabBarIcon: ({color, size}) => (
-                  <Icon name="build" size={21} color="#FFF" />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Another"
-              component={list}
-              options={{
-                tabBarLabel: '',
-                headerShown: false,
-                tabBarIcon: ({color, size}) => (
-                  <Icon name="favorite-outline" size={25} color="#FFF" />
-                ),
-              }}
-            />
-          </>
-        ) : (
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarActiveTintColor: '#FFF',
+            tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.5)',
+            tabBarStyle: {
+              borderTopWidth: 0,
+              position: 'absolute',
+              elevation: 0,
+              height: 70,
+              backgroundColor: 'rgba(000, 000, 000, 0.95)',
+              paddingBottom: 10,
+            },
+          }}>
           <Tab.Screen
-            name="Connect"
-            component={Connect}
+            name={'Home'}
+            component={HomePage}
             options={{
-              tabBarLabel: '',
               headerShown: false,
-              tabBarIcon: ({color, size}) => (
-                <Icon name="face" size={25} color="#FFF" />
-              ),
-            }}
-          />
-        )}
-      </Tab.Navigator>
+              tabBarIcon: ({size, focused, color}) => {
+                return (
+                  <Image
+                    style={{width: size, height: size}}
+                    source={require('./assets/home.png')}
+                  />
+                );
+              },
+            }}></Tab.Screen>
+          <Tab.Screen
+            name={'Discover'}
+            component={Search}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({size, focused, color}) => {
+                return (
+                  <Image
+                    style={{width: size, height: size}}
+                    source={require('./assets/search.png')}
+                  />
+                );
+              },
+            }}></Tab.Screen>
+          {auth.token != null ? (
+            <>
+              <Tab.Screen
+                name={'Profile'}
+                component={Profile}
+                options={{
+                  headerShown: false,
+                  tabBarIcon: ({size, focused, color}) => {
+                    return (
+                      <Image
+                        style={{width: size, height: size}}
+                        source={require('./assets/profile.png')}
+                      />
+                    );
+                  },
+                }}></Tab.Screen>
+            </>
+          ) : (
+            <Tab.Screen
+              name={'Profile'}
+              component={Connect}
+              options={{
+                headerShown: false,
+                tabBarIcon: ({size, focused, color}) => {
+                  return (
+                    <Image
+                      style={{width: size, height: size}}
+                      source={require('./assets/profile.png')}
+                    />
+                  );
+                },
+              }}
+            />
+          )}
+        </Tab.Navigator>
+      </NavigationContainer>
     </>
   );
 }
