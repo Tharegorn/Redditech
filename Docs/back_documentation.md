@@ -1,5 +1,6 @@
 Back-End Documention
 
+![](https://d33wubrfki0l68.cloudfront.net/554c3b0e09cf167f0281fda839a5433f2040b349/ecfc9/img/header_logo.svg)
 Auth Class
 
 Authenticate
@@ -20,6 +21,8 @@ function example() {
 ```
 
 List of functions that can be used for user
+
+Context Libraty : 🐠 useAuth
 
 ```js
 
@@ -72,3 +75,11 @@ const [prefs, setPrefs] = useState({
 // prefs will contains the user preferences
 
 ```
+
+Licrary for reddit authentification: 
+
+![](https://raw.githubusercontent.com/FormidableLabs/react-native-app-auth/main/docs/react-native-app-auth-logo.png)
+
+Library used for requests:
+
+![](https://axios-http.com/assets/logo.svg)
