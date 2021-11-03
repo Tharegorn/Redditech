@@ -13,8 +13,9 @@ import axios from 'axios';
 import CardPost from '../components/CardPost';
 import Header from '../navigation/Header';
 import {unsubscribe} from '../utils/PostReddit';
+import {NavigationContainer} from '@react-navigation/native';
 
-const list = () => {
+function list({navigation}) {
   const auth = useAuth();
   const [subs, setSubs] = useState(null);
   const options = {
@@ -75,10 +76,7 @@ const list = () => {
             ))
           ) : (
             <View style={styles.container}>
-              <Text style={styles.text_position}>
-                Enter in the world of Reddit {'\n'}
-                with a simple search.
-              </Text>
+              <Text style={styles.text_position}>Connect you from Profile</Text>
             </View>
           )}
         </ScrollView>
@@ -86,7 +84,7 @@ const list = () => {
       <View />
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

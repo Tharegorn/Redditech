@@ -6,8 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -17,56 +16,32 @@ import {
   useColorScheme,
   View,
   Button,
+  Image,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './src/routes/Home';
 import {ProvideAuth} from './src/routes/utils/useauth';
 import list from './src/routes/screens/list';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import HomePage from './src/routes/screens/HomePage';
+import Search from './src/routes/screens/Search';
+import Connect from './src/routes/screens/Connection';
+import Profile from './src/routes/screens/Profile';
+import {useAuth} from './src/routes/utils/useauth';
+import Home from './src/routes/Home';
 
-const Stack = createNativeStackNavigator();
-const App: () => Node = () => {
+const Tab = createBottomTabNavigator();
+export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const auth = useAuth();
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
   return (
     <ProvideAuth>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Main"
-            component={HomeScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="list" component={list} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Home />
     </ProvideAuth>
   );
-};
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
+}

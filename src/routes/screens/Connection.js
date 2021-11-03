@@ -54,7 +54,7 @@ const Connect = () => {
           }}></Button>
       </View>
       <View style={{position: 'absolute', bottom: 25, alignSelf: 'center'}}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 60}}>
           <Text style={styles.body}>Not already a Redditor ? </Text>
           <Text
             style={styles.link}

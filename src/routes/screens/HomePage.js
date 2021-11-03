@@ -94,7 +94,7 @@ const HomePage = () => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: '#101111'}}>
-      <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.5)'} />
+      <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.78)'} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <Image
