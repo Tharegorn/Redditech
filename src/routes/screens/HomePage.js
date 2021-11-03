@@ -214,6 +214,7 @@ const HomePage = () => {
             <></>
           )}
         </View>
+        <View style={{paddingBottom: 50}}></View>
       </ScrollView>
     </View>
   );
