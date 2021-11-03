@@ -79,6 +79,7 @@ function list({navigation}) {
               <Text style={styles.text_position}>Connect you from Profile</Text>
             </View>
           )}
+          <View style={{paddingBottom: 80}}></View>
         </ScrollView>
       </View>
       <View />
