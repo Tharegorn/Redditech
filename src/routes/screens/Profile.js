@@ -5,15 +5,14 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Button,
   ScrollView,
+  Button,
 } from 'react-native';
 import {useAuth} from '../utils/useauth';
+import list from './list';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import App from '../../../App';
 
-const Profile = () => {
+function Profile({navigation}) {
   const auth = useAuth();
   useEffect(() => {
     auth.Profile();
@@ -39,7 +38,7 @@ const Profile = () => {
           height: 400,
           right: 0,
         }}
-        source={require('../assets/FrameProfileOrange.png')}
+        source={require('../assets/linearBlack.png')}
       />
       <View style={styles.container}>
         <View>
@@ -125,10 +124,16 @@ const Profile = () => {
             </Text>
           </View>
         </View>
+        <View style={styles.button}>
+          <Button
+            color="rgba(255, 255, 255, 0.00)"
+            title="Mes abonnements"
+            onPress={() => navigation.navigate('Sub')}></Button>
+        </View>
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   nameStyle: {
@@ -185,8 +190,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginHorizontal: 50,
-    marginTop: 40,
-    paddingBottom: 20,
+    marginTop: 20,
+    paddingBottom: 30,
+  },
+  button: {
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 30,
+    width: '80%',
+    alignSelf: 'center',
+    marginTop: 10,
   },
 });
 

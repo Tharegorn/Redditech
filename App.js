@@ -45,19 +45,3 @@ export default function App() {
     </ProvideAuth>
   );
 }
-
-function SearchScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
