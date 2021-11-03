@@ -84,7 +84,7 @@ function Home({}) {
             <>
               <Tab.Screen
                 name={'Profile'}
-                component={ProfileStackScreen}
+                component={Profile}
                 options={{
                   headerShown: false,
                   tabBarIcon: ({size, focused, color}) => {
@@ -92,6 +92,36 @@ function Home({}) {
                       <Image
                         style={{width: size, height: size}}
                         source={require('./assets/profile.png')}
+                      />
+                    );
+                  },
+                }}></Tab.Screen>
+              <Tab.Screen
+                name={'Sub'}
+                component={list}
+                options={{
+                  gestureEnabled: false,
+                  headerShown: false,
+                  tabBarIcon: ({size, focused, color}) => {
+                    return (
+                      <Image
+                        style={{width: size, height: size}}
+                        source={require('./assets/library.png')}
+                      />
+                    );
+                  },
+                }}></Tab.Screen>
+              <Tab.Screen
+                name={'Settings'}
+                component={Settings}
+                options={{
+                  gestureEnabled: false,
+                  headerShown: false,
+                  tabBarIcon: ({size, focused, color}) => {
+                    return (
+                      <Image
+                        style={{width: size, height: size}}
+                        source={require('./assets/chevron.png')}
                       />
                     );
                   },
@@ -114,20 +144,6 @@ function Home({}) {
               }}
             />
           )}
-          <Tab.Screen
-            name={'Sub'}
-            component={list}
-            options={{
-              gestureEnabled: false,
-              headerShown: false,
-            }}></Tab.Screen>
-          <Tab.Screen
-            name={'Settings'}
-            component={Settings}
-            options={{
-              gestureEnabled: false,
-              headerShown: false,
-            }}></Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>
     </>
